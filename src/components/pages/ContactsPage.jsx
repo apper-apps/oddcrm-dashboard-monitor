@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
-import Header from "@/components/organisms/Header";
-import ContactList from "@/components/organisms/ContactList";
-import ContactForm from "@/components/organisms/ContactForm";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import ContactList from "@/components/organisms/ContactList";
+import Header from "@/components/organisms/Header";
+import ContactForm from "@/components/organisms/ContactForm";
+import Button from "@/components/atoms/Button";
 import { contactService } from "@/services/api/contactService";
 
 const ContactsPage = () => {
-  const { onMenuClick } = useOutletContext();
+const { onMenuClick } = useOutletContext();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,6 @@ const ContactsPage = () => {
   const [viewMode, setViewMode] = useState("grid");
   const [showForm, setShowForm] = useState(false);
   const [editingContact, setEditingContact] = useState(null);
-
   useEffect(() => {
     loadContacts();
   }, []);
@@ -40,8 +39,9 @@ const ContactsPage = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
+const handleSearchChange = (e) => {
+    const value = e?.target?.value || "";
+    setSearchValue(value);
   };
 
   const handleSearchClear = () => {
@@ -49,7 +49,7 @@ const ContactsPage = () => {
   };
 
   const handleContactClick = (contact) => {
-    navigate(`/contacts/${contact.Id}`);
+    navigate(`/contacts/${contact.id}`);
   };
 
   const handleAddContact = () => {
@@ -57,61 +57,89 @@ const ContactsPage = () => {
     setShowForm(true);
   };
 
+  const handleCancelForm = () => {
+    setEditingContact(null);
+    setShowForm(false);
+  };
+
   const handleEditContact = (contact) => {
     setEditingContact(contact);
     setShowForm(true);
   };
 
-  const handleDeleteContact = async (contact) => {
-    if (window.confirm(`Are you sure you want to delete ${contact.name}?`)) {
+const handleDeleteContact = async (contact) => {
+    if (!contact?.id && !contact?.Id) {
+      toast.error("Invalid contact data");
+      return;
+    }
+    
+    const contactId = contact.id || contact.Id;
+    const contactName = contact.name || 'this contact';
+    
+    if (window.confirm(`Are you sure you want to delete ${contactName}?`)) {
       try {
-        await contactService.delete(contact.Id);
-        setContacts(prev => prev.filter(c => c.Id !== contact.Id));
+        await contactService.delete(contactId);
+        setContacts(prev => prev.filter(c => 
+          (c.id || c.Id) !== contactId
+        ));
         toast.success("Contact deleted successfully");
       } catch (err) {
+        console.error('Delete contact error:', err);
         toast.error("Failed to delete contact");
       }
     }
   };
 
-const handleSaveContact = async (contactData) => {
-    if (editingContact) {
-      const updatedContact = await contactService.update(editingContact.Id, contactData);
-      setContacts(prev => prev.map(c => 
-        c.Id === editingContact.Id ? updatedContact : c
-      ));
-    } else {
-      const newContact = await contactService.create(contactData);
-      setContacts(prev => [...prev, newContact]);
+  const handleSaveContact = async (contactData) => {
+    if (!contactData) {
+      toast.error("Invalid contact data");
+      return;
     }
-    setShowForm(false);
-    setEditingContact(null);
+
+    try {
+      if (editingContact) {
+        const contactId = editingContact.id || editingContact.Id;
+        const updatedContact = await contactService.update(contactId, contactData);
+        setContacts(prev => prev.map(c => {
+          const currentId = c.id || c.Id;
+          return currentId === contactId ? updatedContact : c;
+        }));
+        toast.success("Contact updated successfully");
+      } else {
+        const newContact = await contactService.create(contactData);
+        setContacts(prev => [...prev, newContact]);
+        toast.success("Contact created successfully");
+      }
+      
+      setEditingContact(null);
+      setShowForm(false);
+    } catch (err) {
+      console.error('Save contact error:', err);
+      toast.error(editingContact ? "Failed to update contact" : "Failed to create contact");
+    }
   };
 
-  const handleCancelForm = () => {
-    setShowForm(false);
-    setEditingContact(null);
-  };
-
-  const filteredContacts = contacts.filter(contact => {
+  const searchLower = (searchValue || "").toLowerCase();
+const filteredContacts = contacts.filter(contact => {
     if (!searchValue) return true;
+    if (!contact) return false;
     
     const searchLower = searchValue.toLowerCase();
     return (
-      contact.name.toLowerCase().includes(searchLower) ||
-      contact.email.toLowerCase().includes(searchLower) ||
-      contact.company.toLowerCase().includes(searchLower) ||
-      contact.tags.some(tag => tag.toLowerCase().includes(searchLower))
+      contact.name?.toLowerCase().includes(searchLower) ||
+      contact.email?.toLowerCase().includes(searchLower) ||
+      contact.company?.toLowerCase().includes(searchLower) ||
+      contact.tags?.some(tag => tag?.toLowerCase().includes(searchLower))
     );
   });
 
   if (loading) {
     return (
       <div className="space-y-6">
-        <Header
+<Header
           title="Contacts"
           onMenuClick={onMenuClick}
-          searchValue={searchValue}
+          searchValue={searchValue || ""}
           onSearchChange={handleSearchChange}
           onSearchClear={handleSearchClear}
         />

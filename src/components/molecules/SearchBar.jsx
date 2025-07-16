@@ -1,40 +1,42 @@
 import React from "react";
 import ApperIcon from "@/components/ApperIcon";
-import Input from "@/components/atoms/Input";
 import { cn } from "@/utils/cn";
 
-const SearchBar = ({ 
-  placeholder = "Search...", 
-  value, 
+export default function SearchBar({
+  placeholder = "Search...",
+  value = "",
   onChange,
   onClear,
   className,
   ...props 
-}) => {
+}) {
+  const safeValue = value || "";
+  
   return (
-    <div className={cn("relative", className)}>
-      <ApperIcon 
-        name="Search" 
-        className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" 
+    <div className={cn("relative flex items-center", className)}>
+      <ApperIcon
+        name="search"
+        size={20}
+        className="absolute left-3 text-gray-400"
       />
-      <Input
+      <input
         type="text"
         placeholder={placeholder}
-        value={value}
+        value={safeValue}
         onChange={onChange}
-        className="pl-10 pr-10"
+        className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         {...props}
       />
-      {value && (
+      {safeValue && (
         <button
+          type="button"
           onClick={onClear}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute right-3 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label="Clear search"
         >
-          <ApperIcon name="X" className="h-4 w-4" />
+          <ApperIcon name="x" size={16} />
         </button>
       )}
     </div>
   );
-};
-
-export default SearchBar;
+}
