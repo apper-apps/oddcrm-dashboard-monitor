@@ -1,0 +1,134 @@
+[
+  {
+    "Id": 1,
+    "name": "Alice Johnson",
+    "email": "alice@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "company": "TechCorp Inc.",
+    "status": "active",
+    "tags": ["client", "high-priority", "tech"],
+    "createdAt": "2024-01-10T08:00:00Z",
+    "lastContact": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Bob Smith",
+    "email": "bob@marketingpro.com",
+    "phone": "+1 (555) 234-5678",
+    "company": "Marketing Pro",
+    "status": "prospect",
+    "tags": ["lead", "marketing", "potential"],
+    "createdAt": "2024-01-08T14:30:00Z",
+    "lastContact": "2024-01-15T09:15:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Carol Davis",
+    "email": "carol@designstudio.com",
+    "phone": "+1 (555) 345-6789",
+    "company": "Design Studio",
+    "status": "active",
+    "tags": ["client", "design", "creative"],
+    "createdAt": "2024-01-05T11:15:00Z",
+    "lastContact": "2024-01-15T08:45:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "David Wilson",
+    "email": "david@innovatetech.com",
+    "phone": "+1 (555) 456-7890",
+    "company": "Innovate Tech",
+    "status": "lead",
+    "tags": ["lead", "tech", "innovation"],
+    "createdAt": "2024-01-12T16:20:00Z",
+    "lastContact": "2024-01-15T14:20:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Emily Brown",
+    "email": "emily@financesolutions.com",
+    "phone": "+1 (555) 567-8901",
+    "company": "Finance Solutions",
+    "status": "active",
+    "tags": ["client", "finance", "enterprise"],
+    "createdAt": "2024-01-03T09:45:00Z",
+    "lastContact": "2024-01-15T11:00:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Frank Miller",
+    "email": "frank@mediagroup.com",
+    "phone": "+1 (555) 678-9012",
+    "company": "Media Group",
+    "status": "prospect",
+    "tags": ["media", "content", "lead"],
+    "createdAt": "2024-01-07T13:30:00Z",
+    "lastContact": "2024-01-15T13:30:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "Grace Taylor",
+    "email": "grace@consultingfirm.com",
+    "phone": "+1 (555) 789-0123",
+    "company": "Consulting Firm",
+    "status": "active",
+    "tags": ["client", "consulting", "long-term"],
+    "createdAt": "2024-01-01T10:00:00Z",
+    "lastContact": "2024-01-15T16:15:00Z"
+  },
+  {
+    "Id": 8,
+    "name": "Henry Anderson",
+    "email": "henry@retailchain.com",
+    "phone": "+1 (555) 890-1234",
+    "company": "Retail Chain",
+    "status": "inactive",
+    "tags": ["retail", "inactive", "past-client"],
+    "createdAt": "2023-12-15T14:20:00Z",
+    "lastContact": "2024-01-15T12:30:00Z"
+  },
+  {
+    "Id": 9,
+    "name": "Ivy Chen",
+    "email": "ivy@webagency.com",
+    "phone": "+1 (555) 901-2345",
+    "company": "Web Agency",
+    "status": "prospect",
+    "tags": ["web", "agency", "potential"],
+    "createdAt": "2024-01-13T17:00:00Z",
+    "lastContact": "2024-01-15T17:00:00Z"
+  },
+  {
+    "Id": 10,
+    "name": "Jack Roberts",
+    "email": "jack@software.com",
+    "phone": "+1 (555) 012-3456",
+    "company": "Software Inc.",
+    "status": "active",
+    "tags": ["client", "software", "support"],
+    "createdAt": "2024-01-02T09:00:00Z",
+    "lastContact": "2024-01-15T09:00:00Z"
+  },
+  {
+    "Id": 11,
+    "name": "Karen White",
+    "email": "karen@healthtech.com",
+    "phone": "+1 (555) 123-7890",
+    "company": "HealthTech Solutions",
+    "status": "lead",
+    "tags": ["healthcare", "tech", "new-lead"],
+    "createdAt": "2024-01-14T11:30:00Z",
+    "lastContact": "2024-01-14T11:30:00Z"
+  },
+  {
+    "Id": 12,
+    "name": "Leo Martinez",
+    "email": "leo@logisticspro.com",
+    "phone": "+1 (555) 234-8901",
+    "company": "Logistics Pro",
+    "status": "prospect",
+    "tags": ["logistics", "supply-chain", "b2b"],
+    "createdAt": "2024-01-11T15:45:00Z",
+    "lastContact": "2024-01-12T09:20:00Z"
+  }
+]
